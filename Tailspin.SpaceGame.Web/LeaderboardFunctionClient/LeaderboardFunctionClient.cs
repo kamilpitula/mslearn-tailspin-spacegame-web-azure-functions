@@ -20,8 +20,12 @@ namespace TailSpin.SpaceGame.Web
         {
             using (WebClient webClient = new WebClient())
             {
-                string json = await webClient.DownloadStringTaskAsync($"{this._functionUrl}?page={page}&pageSize={pageSize}&mode={mode}&region={region}");
-                return JsonSerializer.Deserialize<LeaderboardResponse>(json);
+                var path = $"{this._functionUrl}?page={page}&pageSize={pageSize}&mode={mode}&region={region}";
+                string json = await webClient.DownloadStringTaskAsync(path);
+                var result = JsonSerializer.Deserialize<LeaderboardResponse>(json);
+                if(result is null)
+                    throw new Exception(json + "\n" + path);
+                return result;
             }
         }
     }
