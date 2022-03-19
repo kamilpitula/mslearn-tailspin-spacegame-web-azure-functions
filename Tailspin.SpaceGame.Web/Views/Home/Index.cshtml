@@ -57,7 +57,7 @@
                     </div>
 
                     @{
-                        if (Model.Scores.Count() == 0)
+                        if (Model.Scores?.Count() == 0)
                         {
                             <div class="row" style="margin-left: 5px; margin-top: 20px;">No scores match your selection.</div>
                         }
