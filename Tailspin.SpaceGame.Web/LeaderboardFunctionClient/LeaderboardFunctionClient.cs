@@ -23,9 +23,8 @@ namespace TailSpin.SpaceGame.Web
                 var path = $"{this._functionUrl}?page={page}&pageSize={pageSize}&mode={mode}&region={region}";
                 string json = await webClient.DownloadStringTaskAsync(path);
                 var result = JsonSerializer.Deserialize<LeaderboardResponse>(json);
-                if(result is null)
-                    throw new Exception(json + "\n" + path);
-                return result;
+                
+                throw new Exception(json + "\n" + path);
             }
         }
     }
